@@ -99,7 +99,7 @@
   <main>
     <p>If you’d like to get in touch, feel free to send me a message using the form below or reach out through the links below.</p>
 
-    <form action="mailto:your.email@example.com" method="post" enctype="text/plain">
+    <form id="contactForm">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" placeholder="Your Name/Studio" required>
 
@@ -126,5 +126,26 @@
   <footer>
     © 2025 Owen Till — Game Developer Portfolio
   </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = encodeURIComponent(document.getElementById('name').value);
+      const email = encodeURIComponent(document.getElementById('email').value);
+      const message = encodeURIComponent(document.getElementById('message').value);
+      const subject = encodeURIComponent('Contact from Portfolio');
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=owentill545@gmail.com&su=${subject}&body=Name:%20${name}%0AEmail:%20${email}%0A%0A${message}`;
+
+      const mailtoUrl = `mailto:owentill545@gmail.com?subject=${subject}&body=Name:%20${name}%0AEmail:%20${email}%0A%0A${message}`;
+
+      const win = window.open(gmailUrl, '_blank');
+
+      if (!win) {
+        window.location.href = mailtoUrl;
+      }
+    });
+  </script>
 </body>
 </html>
