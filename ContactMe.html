@@ -113,7 +113,8 @@
     </form>
 
     <div class="alt-links">
-      <a href="mailto:owentill545@gmail.com">Email Me</a>
+      <!-- CHANGED: Removed mailto from href and added id -->
+      <a href="#" id="emailMeButton">Email Me</a>
       <a href="https://www.linkedin.com/in/owen-till-b3a0852b1" target="_blank">LinkedIn</a>
       <hr>
       <a href="index.html" class="back-link">Home Page</a>
@@ -128,6 +129,7 @@
   </footer>
 
   <script>
+    // --- Handle "Send Message" form submission ---
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -137,11 +139,21 @@
       const subject = encodeURIComponent('Contact from Portfolio');
 
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=owentill545@gmail.com&su=${subject}&body=Name:%20${name}%0AEmail:%20${email}%0A%0A${message}`;
-
       const mailtoUrl = `mailto:owentill545@gmail.com?subject=${subject}&body=Name:%20${name}%0AEmail:%20${email}%0A%0A${message}`;
 
       const win = window.open(gmailUrl, '_blank');
+      if (!win) {
+        window.location.href = mailtoUrl;
+      }
+    });
 
+    document.getElementById('emailMeButton').addEventListener('click', function(e) {
+      e.preventDefault();
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=owentill545@gmail.com`;
+      const mailtoUrl = `mailto:owentill545@gmail.com`;
+
+      const win = window.open(gmailUrl, '_blank');
       if (!win) {
         window.location.href = mailtoUrl;
       }
